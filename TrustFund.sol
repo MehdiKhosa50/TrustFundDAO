@@ -29,14 +29,14 @@ contract CryptoFunding {
     constructor(uint _deadLine, uint _target) {
         target = _target;
         deadLine = block.timestamp + _deadLine;
-        minimumContribution = 1 * 1e16; // Minimum contribution of 0.01 ETH
+        minimumContribution = 1; // Minimum contribution of 1 wei
         CEOAddress = msg.sender;
     }
 
     // Function to contribute Ether to the contract
     function sendEther() payable public {
         require(block.timestamp < deadLine, "Deadline has passed");
-        require(msg.value >= minimumContribution, "You need to send at least 0.01 ETH");
+        require(msg.value >= minimumContribution, "You need to send at least 1 wei");
         
         if (Contributors[msg.sender] == 0) {
             noOfContributors++;
